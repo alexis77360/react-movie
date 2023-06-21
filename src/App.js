@@ -1,11 +1,21 @@
 import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import LikePage from './pages/LikePage';
+
+
+
 
 const App = () => {
   return (
-    <div>
-      <h1>Hello, world!</h1>
-      
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/coup-de-coeur" element={<LikePage /> } />
+        <Route path="*" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+
+
   );
 };
 
