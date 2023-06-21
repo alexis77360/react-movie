@@ -82,9 +82,20 @@ const Card = ({movie}) => {
     }
 
 
-    
-    
+   const addStorage = () => {
+         //? on récupère les données du local storage et si il n'y en a pas on met un tableau vide
+        let storedData = window.localStorage.movies ? window.localStorage.movies.split(',') : [];
 
+
+        //? si le tableau ne contient pas l'id du film on l'ajoute
+        if(!storedData.includes(movie.id.toString())) {
+            //? on ajoute l'id du film au tableau
+            storedData.push(movie.id);
+            //? on met à jour le local storage
+            window.localStorage.movies = storedData 
+        }
+
+    }
 
     
     return (
@@ -105,7 +116,11 @@ const Card = ({movie}) => {
 {/*             //? si il y a une description on affiche le titre sinon on affiche rien
  */}            {movie.overview ? (<h3>Synopsis</h3>) : ""}
             <p>{movie.overview}</p>
-            <div className="btn">Ajouter au coups de coeur</div>
+            <div className="btn" onClick={
+                () => {
+                    addStorage()
+            }}>
+            Ajouter au coups de coeur</div>
 
 
         </div>
