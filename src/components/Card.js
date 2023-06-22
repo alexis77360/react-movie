@@ -97,6 +97,14 @@ const Card = ({movie}) => {
 
     }
 
+    const deleteStorage = () => {
+        let storedData = window.localStorage.movies.split(',');
+        //? on filtre le tableau pour retirer l'id du film
+        let newData = storedData.filter((id) => id != movie.id);
+        //? on met à jour le local storage
+        window.localStorage.movies = newData;
+    }
+
     
     return (
         <div className='card'>
@@ -116,14 +124,30 @@ const Card = ({movie}) => {
 {/*             //? si il y a une description on affiche le titre sinon on affiche rien
  */}            {movie.overview ? (<h3>Synopsis</h3>) : ""}
             <p>{movie.overview}</p>
+
+            {movie.genre_ids ? 
+            (
+
             <div className="btn" onClick={
-                () => {
-                    addStorage()
-            }}>
-            Ajouter au coups de coeur</div>
+                () => {addStorage()}}>Ajouter au coups de coeur</div>
+            )
+            :(
+                <div className="btn" onClick={ () =>
+                    {
+                        deleteStorage();
+                        window.location.reload();
+                    }
+                
+                }> Supprimer de la liste</div>
 
-
+            )}
         </div>
+
+
+
+
+
+    
 
     );
 };
