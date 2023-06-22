@@ -115,10 +115,11 @@ const Card = ({movie}) => {
             : "./img/poster.jpg"} alt={movie.title} />
             <h2>{movie.title}</h2>
             {movie.release_date ? (<h5>Sorti le : {dateFormater(movie.release_date)}</h5> ) : null}
-            <h4>Note : {movie.vote_average}/10 <span>⭐</span></h4>
+            <h4>Note : {movie.vote_average.toFixed(1)}/10 <span>⭐</span></h4>
             <ul>
                 {
-                    movie.genre_ids ? genreFinder() : null
+                    //? si le film n'a pas de genre on affiche rien sinon on affiche les genres
+                    movie.genre_ids ? genreFinder() : movie.genres.map((genre) => <li key={genre.id}>{genre.name}</li>)
                 }
             </ul>
 {/*             //? si il y a une description on affiche le titre sinon on affiche rien
